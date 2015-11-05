@@ -65,6 +65,12 @@ module MandrillDm
       return_string_value(:merge_language)
     end
 
+    def merge_vars
+      return unless mail[:merge_vars] and mail[:merge_vars].value
+
+      eval mail[:merge_vars].value
+    end
+
     def preserve_recipients
       nil_true_false?(:preserve_recipients)
     end
@@ -131,6 +137,7 @@ module MandrillDm
         inline_css: inline_css,
         merge: merge,
         merge_language: merge_language,
+        merge_vars: merge_vars,
         preserve_recipients: preserve_recipients,
         return_path_domain: return_path_domain,
         signing_domain: signing_domain,
