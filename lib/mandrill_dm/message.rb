@@ -66,9 +66,7 @@ module MandrillDm
     end
 
     def merge_vars
-      return unless mail[:merge_vars] and mail[:merge_vars].value
-
-      eval mail[:merge_vars].value
+      mail[:merge_vars] ? mail[:merge_vars].instance_variable_get("@value") : nil
     end
 
     def preserve_recipients
